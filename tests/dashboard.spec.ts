@@ -1,20 +1,20 @@
-import { test, expect } from '@playwright/test';
-import { DashboardPage } from '../pages/DashboardPage';
-import { LoginPage } from '../pages/LoginPage';
-import { users } from '../fixtures/testData';
+import * as test from "@playwright/test";
+import { DashboardPage } from "../pages/DashboardPage";
+import { LoginPage } from "../pages/LoginPage";
+import { users } from "../fixtures/testData";
 
-test.describe('Dashboard', () => {
-  test.beforeEach(async ({ page }) => {
+test.test.describe("Dashboard", () => {
+  test.test.beforeEach(async ({ page }) => {
     const loginPage = new LoginPage(page);
     await loginPage.open();
     await loginPage.login(users.validUser.email, users.validUser.password);
     await page.waitForURL(/dashboard/);
   });
 
-  test('should display dashboard title', async ({ page }) => {
+  test.test("should display dashboard title", async ({ page }) => {
     const dashboardPage = new DashboardPage(page);
 
     await dashboardPage.open();
-    await expect(dashboardPage.title).toBeVisible();
+    await test.expect(dashboardPage.title).toBeVisible();
   });
 });
